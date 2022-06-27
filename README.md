@@ -33,6 +33,7 @@
 
     `npm install`
 
+<<<<<<< HEAD
 5.  Para a utilização da rota privada instalar o pacote jsonwebtoken:
 
     `npm install jsonwebtoken`
@@ -42,4 +43,6 @@
     Esse token deve ser inserido na aba de bearer do http://localhost:3001/viloes em caso de post, put e delete esse token expira em 1 dia e deve ser renovado para novos cadastros.
     Essa caminho não é necessário para herois, pois é uma rota pública, enquanto a rota de vilões é uma rota privada.
 
+=======
+>>>>>>> da613c0c5554d2791412a5cacab893678f2cfb7f
     _F5 irá executar a API Fake._
