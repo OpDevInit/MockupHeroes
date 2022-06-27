@@ -1,5 +1,6 @@
 
 console.log("Iniciando meu servidor ");
+import auth from "./auth.js"
 
 const express = require('express');
 const req = require('express/lib/request');
@@ -90,6 +91,85 @@ app.delete('/herois/:index', (req, res) => {
 
 })
 
+var cadastros = {
+    "viloes": [
+        {
+            "id": 1,
+            "Liga": "Marvel",
+            "Vilão": "Duende Verde",
+            "Habilidade": "Bombas",
+            "Personalidade": "Força sobrehumana"
+        },
+        {
+
+            "id": 2,
+            "Liga": "DC",
+            "Vilão": "Coringa",
+            "Habilidade": "Gases tóxicos",
+            "Personalidade": "Psicopata"
+        },
+
+    ]
+};
+
+
+//retornar vilão selecionado
+app.get('/viloes/:index', (req, res) => {
+    const { index } = req.params;
+    return res.json(cadastros.viloes[index]);
+})
+
+//retornar todos os vilões
+app.get('/viloes', (req, res) => {
+
+    return res.json(cadastros.viloes);
+
+}
+)
+
+//Criar novo cadastro:
+app.post(auth.middlewareAuth,'/viloes', (req, res) => {
+    var id = req.body.id;
+    var liga = req.body.Liga;
+    var vilao = req.body.Vilão;
+    var habilidade = req.body.Habilidade;
+    var personalidade = req.body.Personalidade;
+    var novoVilao = cadastros.viloes;
+
+    novoVilao.push({ "id: ": id, "Liga ": liga, "Vilão: ": vilao, "Habilidade: ": habilidade, "Personalidade": personalidade });
+
+    return res.json(novoVilao);
+
+})
+
+//Atualizar vilão:
+app.put(auth.middlewareAuth,'/herois/:index', (req, res) => {
+    const { index } = req.params;
+    var id = req.body.id;
+    var liga = req.body.Liga;
+    var vilao = req.body.Vilao;
+    var habilidade = req.body.Habilidade;
+    var personalidade = req.body.Personalidade;
+    var novoVilao = cadastros.viloes;
+    var id = index;
+
+    if (novoVilao.indexOf(index)) {
+        novoVilao.splice((index - 1), 4, { "id: ": id, "Liga ": liga, "Vilão: ": vilao, "Habilidade: ": habilidade, "Personalidade": personalidade })
+    }
+    return res.json(novovilao);
+})
+//Deletar vilão:
+app.delete(auth.middlewareAuth,'/viloes/:index', (req, res) => {
+    const viloes = cadastros.viloes;
+    const { index } = req.params;
+    var id = index;
+
+    if (viloes.indexOf(index)) {
+        viloes.splice((index - 1), 4)
+    }
+    return res.json({ message: "Seu vilão foi deletado!!" });
+
+})
 
 
 app.listen(port, () => {
